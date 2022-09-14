@@ -47,7 +47,7 @@ public class dbService {
         ResultSet resultSet = preparedStatement.executeQuery();
         List<User> userList = new LinkedList<>();
         while (resultSet.next()){
-            User user = new User(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3));
+            User user = new User(resultSet.getLong(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4));
             userList.add(user);
         }
         return userList;

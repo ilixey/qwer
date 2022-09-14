@@ -1,6 +1,7 @@
 package com.example.demo1.entities;
 
 public class User {
+    private long id;
     private String name;
     private String surname;
     private int age;
@@ -17,7 +18,8 @@ public class User {
         return age;
     }
 
-    public User(String name, String surname, int age) {
+    public User(long id, String name, String surname, int age) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.age = age;
