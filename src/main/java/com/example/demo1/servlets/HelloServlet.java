@@ -28,7 +28,6 @@ public class HelloServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        // Hello
         PrintWriter out = response.getWriter();
         for(User user:userList){
             out.println(user.getSurname() + "     " + user.getSurname() + "    " + user.getAge());
