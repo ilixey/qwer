@@ -6,7 +6,6 @@ import com.example.demo1.services.dbService;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.List;
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 

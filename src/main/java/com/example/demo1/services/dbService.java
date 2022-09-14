@@ -1,8 +1,6 @@
 package com.example.demo1.services;
 
 import com.example.demo1.entities.User;
-
-import javax.jws.soap.SOAPBinding;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
