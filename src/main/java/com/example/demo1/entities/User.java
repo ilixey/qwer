@@ -18,6 +18,10 @@ public class User {
         return age;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public User(long id, String name, String surname, int age) {
         this.id = id;
         this.name = name;
