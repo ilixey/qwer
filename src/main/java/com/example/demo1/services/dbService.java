@@ -44,7 +44,7 @@ public class dbService {
     }
 
     public List<User> getUsers() throws SQLException{
-        String request = "SELECT * FROM testdb";
+        String request = "SELECT * FROM users";
         PreparedStatement preparedStatement = connection.prepareStatement(request);
         ResultSet resultSet = preparedStatement.executeQuery();
         List<User> userList = new LinkedList<>();
