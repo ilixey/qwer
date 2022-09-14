@@ -29,7 +29,7 @@ public class HelloServlet extends HttpServlet {
         }
         PrintWriter out = response.getWriter();
         for(User user:userList){
-            out.println(user.getId() + "      " + user.getName() + "     " + user.getSurname() + "    " + user.getAge() + "/n");
+            out.println(user.getId() + "      " + user.getName() + "     " + user.getSurname() + "    " + user.getAge() + "\n");
 
         }
 
