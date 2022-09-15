@@ -28,4 +28,10 @@ public class User {
         this.surname = surname;
         this.age = age;
     }
+
+    public User(String name, String surname, int age) {
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+    }
 }
