@@ -8,8 +8,8 @@ import java.util.List;
 
 public class dbService {
     private static final String url = "jdbc:postgresql://34.116.188.24:5432/testdb";
-    private static final String login = "postgres";
-    private static final String password = "postgres";
+    private static final String login = "vaspiakou";
+    private static final String password = "vaspiakou";
 
     private static final String INSERT_USER = "INSERT INTO users (name, surname, age) VALUES (?, ?, ?);";
     private static final String SELECT_USER_BY_ID = "select * from users where id =?";
