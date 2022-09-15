@@ -56,6 +56,7 @@ public class UserServlet extends HttpServlet {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+                break;
 
         }
 
@@ -78,13 +79,13 @@ public class UserServlet extends HttpServlet {
         int age = Integer.parseInt(request.getParameter("age"));
         User user = new User(name, surname, age);
         dbService.addUser(user);
-        response.sendRedirect("/list");
+        response.sendRedirect("list");
     }
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         long id = Long.parseLong(request.getParameter("id"));
         dbService.deleteUser(id);
-        response.sendRedirect("/list");
+        response.sendRedirect("list");
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -103,7 +104,7 @@ public class UserServlet extends HttpServlet {
 
         User user = new User(id, name, surname, age);
         dbService.updateUser(user);
-        response.sendRedirect("/list");
+        response.sendRedirect("list");
     }
 
     private void listUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
