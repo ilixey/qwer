@@ -96,6 +96,7 @@ public class dbService {
     public void updateUser(User user) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_USER);) {
+
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             statement.setString(1, user.getName());
             statement.setString(2, user.getSurname());
