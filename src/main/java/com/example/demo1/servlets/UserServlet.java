@@ -21,7 +21,6 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getServletPath();
-
         switch (action){
             case "/new":
                 showNewForm(request, response);

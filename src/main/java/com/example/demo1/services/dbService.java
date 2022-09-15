@@ -34,6 +34,8 @@ public class dbService {
     public void addUser(User user) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER)) {
+           // connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+            connection.setAutoCommit(true);
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getSurname());
             preparedStatement.setInt(3, user.getAge());
@@ -76,7 +78,6 @@ public class dbService {
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
-
             // Step 4: Process the ResultSet object.
             while (rs.next()) {
                 String name = rs.getString("name");
@@ -91,7 +92,6 @@ public class dbService {
     }
 
     public void updateUser(User user) throws SQLException {
-        boolean rowUpdated;
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_USER);) {
             statement.setString(1, user.getName());
@@ -101,6 +101,4 @@ public class dbService {
             statement.executeUpdate();
         }
     }
-
-
 }
