@@ -34,8 +34,7 @@ public class dbService {
     public void addUser(User user) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER)) {
-           // connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-            connection.setAutoCommit(true);
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getSurname());
             preparedStatement.setInt(3, user.getAge());
@@ -48,6 +47,7 @@ public class dbService {
     public void deleteUser(long id) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER)) {
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         }
@@ -58,6 +58,7 @@ public class dbService {
         List<User> userList = new LinkedList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS)) {
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 User user = new User(resultSet.getLong(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4));
@@ -74,6 +75,7 @@ public class dbService {
         try (Connection connection = getConnection();
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             preparedStatement.setLong(1, id);
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
@@ -94,6 +96,7 @@ public class dbService {
     public void updateUser(User user) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_USER);) {
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             statement.setString(1, user.getName());
             statement.setString(2, user.getSurname());
             statement.setInt(3, user.getAge());
