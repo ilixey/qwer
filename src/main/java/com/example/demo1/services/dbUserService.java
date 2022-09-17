@@ -1,15 +1,15 @@
 package com.example.demo1.services;
 
 import com.example.demo1.entities.User;
+import com.example.demo1.util.ConnectionManager;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class dbService {
-    private static final String url = "jdbc:postgresql://34.116.188.24:5432/testdb";
-    private static final String login = "vaspiakou";
-    private static final String password = "vaspiakou";
+public final class dbUserService {
+
+    private final static dbUserService INSTANCE = new dbUserService();
 
     private static final String INSERT_USER = "INSERT INTO users (name, surname, age) VALUES (?, ?, ?);";
     private static final String SELECT_USER_BY_ID = "select * from users where id =?";
@@ -17,22 +17,15 @@ public class dbService {
     private static final String DELETE_USER = "delete from users where id=?;";
     private static final String UPDATE_USER = "update users set name=?, surname=?, age=? where id=?;";
 
+    private dbUserService() {
+    }
 
-    protected Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url, login, password);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return connection;
+    public static dbUserService getInstance() {
+        return INSTANCE;
     }
 
     public void addUser(User user) throws SQLException {
-        try (Connection connection = getConnection();
+        try (Connection connection = ConnectionManager.get();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER)) {
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             preparedStatement.setString(1, user.getName());
@@ -45,7 +38,7 @@ public class dbService {
     }
 
     public void deleteUser(long id) throws SQLException {
-        try (Connection connection = getConnection();
+        try (Connection connection = ConnectionManager.get();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER)) {
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             preparedStatement.setLong(1, id);
@@ -56,7 +49,7 @@ public class dbService {
 
     public List<User> getUsers() throws SQLException {
         List<User> userList = new LinkedList<>();
-        try (Connection connection = getConnection();
+        try (Connection connection = ConnectionManager.get();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS)) {
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -72,7 +65,7 @@ public class dbService {
     public User selectUser(long id) {
         User user = null;
         // Step 1: Establishing a Connection
-        try (Connection connection = getConnection();
+        try (Connection connection = ConnectionManager.get();
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -94,7 +87,7 @@ public class dbService {
     }
 
     public void updateUser(User user) throws SQLException {
-        try (Connection connection = getConnection();
+        try (Connection connection = ConnectionManager.get();
              PreparedStatement statement = connection.prepareStatement(UPDATE_USER);) {
 
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
