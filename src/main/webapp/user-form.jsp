@@ -20,7 +20,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
             <ul class="navbar-nav">
-                <li><a href="/user-list" class="nav-link">Users</a></li>
+                <li><a href="<%= request.getContextPath()%>/users-list" class="nav-link">Users</a></li>
             </ul>
         </nav>
     </header>
@@ -35,10 +35,10 @@
                 <!-- ---------------------- FORM GOAL LOGIC ---------------------- -->
 
                 <c:if test="${user != null}">
-                    <form action="update-user" method="post">
+                    <form action="<%= request.getContextPath()%>/update-user" method="post">
                 </c:if>
                 <c:if test="${user == null}">
-                    <form action="insert-user" method="post">
+                    <form action="<%= request.getContextPath()%>/insert-user" method="post">
                 </c:if>
 
                     <!-- ------------------- FORM NAME LOGIC ------------------- -->
@@ -72,7 +72,8 @@
                             <input type="text"
                                    value="<c:out value='${user.surname}' />"
                                    class="form-control"
-                                   name="surname" />
+                                   name="surname"
+                                   required="required"/>
                         </fieldset>
 
                         <!-- ------------------- USER AGE ------------------- -->
@@ -82,7 +83,8 @@
                                    min = "0"
                                    value="<c:out value='${user.age}' />"
                                    class="form-control"
-                                   name="age">
+                                   name="age"
+                                   required="required">
                         </fieldset>
 
                         <button type="submit" class="btn btn-success">Save</button>

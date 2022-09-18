@@ -20,7 +20,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
             <ul class="navbar-nav">
-                <li><a href="/user-list" class="nav-link">Users</a></li>
+                <li><a href="<%= request.getContextPath()%>/users-list" class="nav-link">Users</a></li>
             </ul>
         </nav>
     </header>
@@ -35,10 +35,10 @@
                 <!-- ---------------------- FORM GOAL LOGIC ---------------------- -->
 
                 <c:if test="${activity != null}">
-                    <form action="update-activity" method="post">
+                    <form action="<%= request.getContextPath()%>/update-activity" method="post">
                 </c:if>
                 <c:if test="${activity == null}">
-                    <form action="insert-activity" method="post">
+                    <form action="<%= request.getContextPath()%>/insert-activity" method="post">
                 </c:if>
 
                         <!-- ------------------- FORM NAME LOGIC ------------------- -->
@@ -81,6 +81,7 @@
                             <label>Duration</label>
                             <input type="number"
                                    min = 0
+                                   step = 0.01
                                    value="<c:out value='${activity.duration}' />"
                                    class="form-control"
                                    name="duration">

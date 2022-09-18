@@ -20,7 +20,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
             <ul class="navbar-nav">
-                <li><a href="/user-list" class="nav-link">Users</a></li>
+                <li><a href="<%= request.getContextPath()%>/users-list" class="nav-link">Users</a></li>
             </ul>
         </nav>
     </header>
@@ -36,8 +36,8 @@
 
                 <!-- ----------------------------- ACTION BUTTONS ----------------------------- -->
 
-                <a href="/users-list" class="btn btn-info">Back to Users</a>
-                <a href="/activities/new_activity" class="btn btn-info">Add New Activity</a>
+                <a href="<%= request.getContextPath()%>/users-list" class="btn btn-info">Back to Users</a>
+                <a href="<%= request.getContextPath()%>/new-activity" class="btn btn-info">Add New Activity</a>
             </div>
             <br>
 
@@ -63,8 +63,8 @@
                         <td>
                             <!-- --------------------- ACTION BUTTONS --------------------- -->
 
-                            <a href="activities/edit-activity?id=<c:out value='${activity.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="activities/delete-activity?id=<c:out value='${activity.id}' />">Delete</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%= request.getContextPath()%>edit-activity?id=<c:out value='${activity.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%= request.getContextPath()%>delete-activity?id=<c:out value='${activity.id}' />">Delete</a> &nbsp;&nbsp;&nbsp;&nbsp;
                         </td>
                     </tr>
                 </c:forEach>
