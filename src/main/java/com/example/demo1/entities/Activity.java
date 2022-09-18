@@ -36,6 +36,12 @@ public class Activity {
         this.activity = activity;
         this.duration = duration;
     }
+    // TODO : что-то придумать с этими двумя конструкторами (Long, String, String ) / (String, Long, String)
+    public Activity(String activity, long userId, BigDecimal duration) {
+        this.user_id = userId;
+        this.activity = activity;
+        this.duration = duration;
+    }
 
     public long getId() {
         return id;
