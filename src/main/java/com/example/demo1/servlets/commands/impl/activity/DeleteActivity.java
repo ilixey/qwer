@@ -1,6 +1,6 @@
 package com.example.demo1.servlets.commands.impl.activity;
 
-import com.example.demo1.services.dbUserService;
+import com.example.demo1.services.dbActivityService;
 import com.example.demo1.servlets.commands.Command;
 
 import javax.servlet.ServletException;
@@ -15,7 +15,7 @@ public class DeleteActivity implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             long id = Long.parseLong(request.getParameter("id"));
-            dbUserService.getInstance().deleteUser(id);
+            dbActivityService.getInstance().deleteActivity(id);
             response.sendRedirect("activity-list");
         } catch (SQLException e) {
             throw new RuntimeException(e);

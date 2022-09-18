@@ -18,7 +18,7 @@ public class ShowAllUsers implements Command {
         try {
             List<User> userList = dbUserService.getInstance().getUsers();
             request.setAttribute("listUser", userList);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("list.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
             dispatcher.forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
