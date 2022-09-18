@@ -61,10 +61,11 @@
                         <td><c:out value="${activity.duration}" /></td>
                         <td><c:out value="${activity.publication_date}" /></td>
                         <td>
+
                             <!-- --------------------- ACTION BUTTONS --------------------- -->
 
-                            <!-- <a href="<%= request.getContextPath()%>edit-activity?id=<c:out value='${activity.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; -->
-                            <a href="<%= request.getContextPath()%>delete-activity?id=<c:out value='${activity.id}' />">Delete</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <!-- <a href="<%= request.getContextPath()%>/edit-activity?id=<c:out value='${activity.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; -->
+                            <a href="<%= request.getContextPath()%>/delete-activity?id=<c:out value='${activity.id}' />">Delete</a> &nbsp;&nbsp;&nbsp;&nbsp;
                         </td>
                     </tr>
                 </c:forEach>

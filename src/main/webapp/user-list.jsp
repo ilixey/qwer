@@ -74,9 +74,9 @@
                                 н.п.
                                 http://localhost:8081/edit-user?id=1
                             -->
-                            <a href="<%= request.getContextPath()%>edit-user?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="<%= request.getContextPath()%>delete-user?id=<c:out value='${user.id}' />">Delete</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="<%= request.getContextPath()%>activity-list?userId=<c:out value='${user.id}' />&name=<c:out value='${user.name}' />">Show Activities</a>
+                            <a href="<%= request.getContextPath()%>/edit-user?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%= request.getContextPath()%>/delete-user?id=<c:out value='${user.id}' />">Delete</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<%= request.getContextPath()%>/activity-list?userId=<c:out value='${user.id}' />&name=<c:out value='${user.name}' />">Show Activities</a>
                         </td>
                     </tr>
                 </c:forEach>
