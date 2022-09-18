@@ -1,9 +1,13 @@
 
+<!-- ----------------------------------- FILE SETTINGS ----------------------------------- -->
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 <head>
-    <title>User Management Application</title>
+    <title>Activity List</title>
+    <meta charset=utf-8>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -11,60 +15,62 @@
 </head>
 <body>
 
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark"
-         style="background-color: tomato">
+<!-- --------------------------------------- HEADER --------------------------------------- -->
 
-        <ul class="navbar-nav">
-            <li><a href="<%=request.getContextPath()%>/list"
-                   class="nav-link">Users</a></li>
-        </ul>
-    </nav>
-</header>
-<br>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
+            <ul class="navbar-nav">
+                <li><a href="/user-list" class="nav-link">Users</a></li>
+            </ul>
+        </nav>
+    </header>
+    <br>
 
-<div class="row">
-    <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+<!-- --------------------------------------- CONTENT --------------------------------------- -->
 
-    <div class="container">
-        <h3 class="text-center">List of Users</h3>
-        <hr>
-        <div class="container text-left">
+    <div class="row">
+        <div class="container">
+            <h3 class="text-center">List of Activities for user : <%= request.getParameter("name") %></h3>
+            <hr>
+            <div class="container text-left">
 
-            <a href="<%=request.getContextPath()%>/new" class="btn btn-success">Add New User</a>
+                <!-- ----------------------------- ACTION BUTTONS ----------------------------- -->
 
-            <a href="<%=request.getContextPath()%>/new-activity" class="btn btn-success">Add New Activity</a>
-        </div>
-        <br>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Age</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!--   for (Todo todo: todos) {  -->
-            <c:forEach var="user" items="${listUser}">
+                <a href="/users-list" class="btn btn-info">Back to Users</a>
+                <a href="/activities/new_activity" class="btn btn-info">Add New Activity</a>
+            </div>
+            <br>
 
+            <!-- ------------------------------ RETRIEVED DATA ------------------------------ -->
+
+            <table class="table table-bordered">
+                <thead>
                 <tr>
-                    <td><c:out value="${user.id}" /></td>
-                    <td><c:out value="${user.name}" /></td>
-                    <td><c:out value="${user.surname}" /></td>
-                    <td><c:out value="${user.age}" /></td>
-                    <td><a href="edit?id=<c:out value='${user.id}' />">Edit</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?id=<c:out value='${user.id}' />">Delete</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="show-activity?id=<c:out value='${user.id}' />">Show Activity</a></td>
+                    <th>ID</th>
+                    <th>Activity</th>
+                    <th>Duration</th>
+                    <th>Date</th>
+                    <th>Actions</th>
                 </tr>
-            </c:forEach>
-            <!-- } -->
-            </tbody>
+                </thead>
+                <tbody>
+                <c:forEach var="activity" items="${listActivity}">
+                    <tr>
+                        <td><c:out value="${activity.id}" /></td>
+                        <td><c:out value="${activity.activity}" /></td>
+                        <td><c:out value="${activity.duration}" /></td>
+                        <td><c:out value="${activity.publication_date}" /></td>
+                        <td>
+                            <!-- --------------------- ACTION BUTTONS --------------------- -->
 
-        </table>
+                            <a href="activities/edit-activity?id=<c:out value='${activity.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="activities/delete-activity?id=<c:out value='${activity.id}' />">Delete</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 </body>
 </html>
