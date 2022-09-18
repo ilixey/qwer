@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/activities")
+@WebServlet("/activities/")
 public class ActivityServlet extends HttpServlet {
 
     Map<String, Command> actionMap;

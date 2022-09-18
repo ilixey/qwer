@@ -1,6 +1,7 @@
 package com.example.demo1.servlets;
 
 import com.example.demo1.servlets.commands.Command;
+import com.example.demo1.servlets.commands.impl.activity.*;
 import com.example.demo1.servlets.commands.impl.user.*;
 
 import javax.servlet.*;
@@ -35,8 +36,18 @@ public class UserServlet extends HttpServlet {
         actionMap.put("/update-user", new UpdateUser());
         // SHOW ALL : To show all existing users. A.K.A. HomePage
         actionMap.put("/users-list", new ShowAllUsers());
-        // ACTIVITIES : To redirect onto url /activities and set active Servlet to ActivityServlet
-        actionMap.put("/activities", new RedirectToActivities());
+        // LIST : возвращает список деятельности для пользователя при условии что в ссылке есть URL переменная
+        actionMap.put("/activity-list", new ShowActivities());
+        // NEW : перенаправляет на activity-form.jsp для добавления новой активности. Следующее действие - INSERT
+        actionMap.put("/new-activity", new AddNewActivity());
+        // INSERT : собирает введённую информацию со страницы activity-form.jsp и создаёт запись в таблице
+        actionMap.put("/insert-activity", new InsertActivity());
+        // DELETE : удаляет запись о деятельности
+        actionMap.put("/delete-activity", new DeleteActivity());
+        // EDIT : перенаправляет на activity-form.jsp для изменения существующей активности. Следующее действие - UPDATE
+        actionMap.put("/edit-activity", new EditActivity());
+        // UPDATE : собирает введённую информацию со страницы activity-form.jsp и обновляет запись в таблице
+        actionMap.put("/update-activity", new UpdateActivity());
     }
 
     @Override
