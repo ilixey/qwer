@@ -1,20 +1,25 @@
 package com.example.demo1.services;
 
 import com.example.demo1.entities.Activity;
+import com.example.demo1.entities.User;
 import com.example.demo1.util.ConnectionManager;
 
 import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 
 public class dbActivityService {
 
     private final static dbActivityService INSTANCE = new dbActivityService();
 
+    // TODO : переделать SELECT_ACTIVITY выводя только поля таблицы activities. Users.Name бесполезно
     private static final String INSERT_ACTIVITY = "INSERT INTO activities (user_id, activity, duration, publication_date) VALUES (?, ?, ?, ?);";
-    private static final String SELECT_ACTIVITY = "select activities.id, users.name, activities.activity, activities.duration, activities.publication_date from activities LEFT JOIN users ON activities.user_id = users.id where users.id =? ORDER BY activities.publication_date;";
-    private static final String DELETE_ACTIVITY = "delete from activities where id=?;";
-    private static final String UPDATE_ACTIVITY = "update activities set activity=?, duration=? WHERE id=?;";
+    private static final String SELECT_ACTIVITY = "SELECT activities.id, users.name, activities.activity, activities.duration, activities.publication_date FROM activities LEFT JOIN users ON activities.user_id = users.id WHERE users.id =? ORDER BY activities.publication_date;";
+    private static final String SELECT_ALL_ACTIVITIES_BY_ID = "SELECT * FROM activities WHERE user_id = ?;";
+    private static final String DELETE_ACTIVITY = "DELETE FROM activities WHERE id=?;";
+    private static final String UPDATE_ACTIVITY = "UPDATE activities SET activity=?, duration=? WHERE id=?;";
 
     private dbActivityService() {
     }
@@ -64,6 +69,22 @@ public class dbActivityService {
             e.getErrorCode();
         }
         return activity;
+    }
+
+    public List<Activity> getActivities(long user_id) throws SQLException {
+        List<Activity> activityList = new LinkedList<>();
+        try (Connection connection = ConnectionManager.get();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ACTIVITIES_BY_ID)) {
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+            preparedStatement.setLong(1,user_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Activity activity = new Activity(resultSet.getLong(1), resultSet.getLong(2), resultSet.getString(3), resultSet.getBigDecimal(4), resultSet.getTimestamp(5));
+                activityList.add(activity);
+            }
+            System.out.println(activityList);
+            return activityList;
+        }
     }
 
     public void updateActivity(Activity activity) throws SQLException {

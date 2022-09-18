@@ -1,11 +1,7 @@
 package com.example.demo1.servlets;
 
 import com.example.demo1.servlets.commands.Command;
-import com.example.demo1.servlets.commands.impl.activity.AddNewActivity;
-import com.example.demo1.servlets.commands.impl.activity.DeleteActivity;
-import com.example.demo1.servlets.commands.impl.activity.EditActivity;
-import com.example.demo1.servlets.commands.impl.activity.InsertActivity;
-import com.example.demo1.servlets.commands.impl.user.*;
+import com.example.demo1.servlets.commands.impl.activity.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,18 +13,25 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/activity")
+@WebServlet("/activities")
 public class ActivityServlet extends HttpServlet {
 
     Map<String, Command> actionMap;
 
     public void init() {
         actionMap = new HashMap<String, Command>();
+        // LIST : возвращает список деятельности для пользователя при условии что в ссылке есть URL переменная
+        actionMap.put("/activity-list", new ShowActivities());
+        // NEW : перенаправляет на activity-form.jsp для добавления новой активности. Следующее действие - INSERT
         actionMap.put("/new-activity", new AddNewActivity());
+        // INSERT : собирает введённую информацию со страницы activity-form.jsp и создаёт запись в таблице
         actionMap.put("/insert-activity", new InsertActivity());
+        // DELETE : удаляет запись о деятельности
         actionMap.put("/delete-activity", new DeleteActivity());
+        // EDIT : перенаправляет на activity-form.jsp для изменения существующей активности. Следующее действие - UPDATE
         actionMap.put("/edit-activity", new EditActivity());
-        actionMap.put("/update-activity", new UpdateUser());
+        // UPDATE : собирает введённую информацию со страницы activity-form.jsp и обновляет запись в таблице
+        actionMap.put("/update-activity", new UpdateActivity());
     }
 
     @Override
@@ -36,7 +39,7 @@ public class ActivityServlet extends HttpServlet {
         response.setContentType("text/html");
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         String action = request.getServletPath();
-        Command command = actionMap.getOrDefault(action, actionMap.get("/list"));
+        Command command = actionMap.getOrDefault(action, actionMap.get("/activity-list"));
         command.execute(request, response);
     }
 
