@@ -14,9 +14,10 @@ public class DeleteActivity implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            long id = Long.parseLong(request.getParameter("id"));
-            dbActivityService.getInstance().deleteActivity(id);
-            response.sendRedirect("activity-list");
+            long userId = Long.parseLong(request.getParameter("id"));
+            String userName = request.getParameter("name");
+            dbActivityService.getInstance().deleteActivity(userId);
+            response.sendRedirect("users-list");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

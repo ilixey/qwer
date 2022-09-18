@@ -17,10 +17,10 @@ public class InsertActivity implements Command {
         try {
             Long userId = Long.valueOf(request.getParameter("user_id"));
             String doneActivity = request.getParameter("activity");
-            BigDecimal duration = BigDecimal.valueOf(Long.parseLong(request.getParameter("duration")));
+            BigDecimal duration = BigDecimal.valueOf(Double.parseDouble(request.getParameter("duration")));
             Activity activity = new Activity(doneActivity,userId, duration);
             dbActivityService.getInstance().addActivity(activity);
-            response.sendRedirect("activity-list");
+            response.sendRedirect("users-list");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

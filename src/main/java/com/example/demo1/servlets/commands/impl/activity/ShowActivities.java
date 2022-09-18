@@ -16,11 +16,15 @@ public class ShowActivities implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /**
-         * Аналог команды servlets.commands.impl.user.RedirectToActivities для activity команд.
+         * Нужен чтобы переключить сервлет UserServlet (/) на ActivityServlet (/activity)
+         * В качестве домашнего каталога пути /activity должен отыгрывать файл activity-list.jsp
+         * При попадании в эту команду, ссылка должна иметь URL переменную - USER_ID
+         * USER_ID используется в методе services.dbActivityService.getActivities(long USER_ID)
+         * getActivities() создаёт выборку деятельности для определённого человека по его USER_ID
          */
 
         try {
-            List<Activity> activityList = dbActivityService.getInstance().getActivities(Long.parseLong(request.getParameter("id")));
+            List<Activity> activityList = dbActivityService.getInstance().getActivities(Long.parseLong(request.getParameter("userId")));
             request.setAttribute("listActivity", activityList);
             RequestDispatcher dispatcher = request.getRequestDispatcher("activity-list.jsp");
             dispatcher.forward(request, response);
