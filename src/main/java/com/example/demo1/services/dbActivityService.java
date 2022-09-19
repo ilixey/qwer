@@ -14,9 +14,7 @@ public class dbActivityService {
 
     private final static dbActivityService INSTANCE = new dbActivityService();
 
-    // TODO : переделать SELECT_ACTIVITY выводя только поля таблицы activities. Users.Name бесполезно
     private static final String INSERT_ACTIVITY = "INSERT INTO activities (user_id, activity, duration, publication_date) VALUES (?, ?, ?, ?);";
-    //private static final String SELECT_COOL_ACTIVITY = "SELECT activities.id, users.name, activities.activity, activities.duration, activities.publication_date FROM activities LEFT JOIN users ON activities.user_id = users.id WHERE users.id =? ORDER BY activities.publication_date;";
     private static final String SELECT_ACTIVITY = "SELECT * FROM activities;";
     private static final String SELECT_ALL_ACTIVITIES_BY_ID = "SELECT * FROM activities WHERE user_id = ?;";
     private static final String DELETE_ACTIVITY = "DELETE FROM activities WHERE id=?;";
