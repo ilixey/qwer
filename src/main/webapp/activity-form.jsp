@@ -32,35 +32,22 @@
         <div class="card">
             <div class="card-body">
 
-                <!-- ---------------------- FORM GOAL LOGIC ---------------------- -->
+                <!-- ------------------------- FORM GOAL ------------------------- -->
 
-                <c:if test="${activity != null}">
-                    <form action="<%= request.getContextPath()%>/update-activity" method="post">
-                </c:if>
-                <c:if test="${activity == null}">
                     <form action="<%= request.getContextPath()%>/insert-activity" method="post">
-                </c:if>
 
-                        <!-- ------------------- FORM NAME LOGIC ------------------- -->
+                        <!-- ---------------- FORM PAGE ACTION NAME ---------------- -->
 
                         <caption>
-                            <h2>
-                                <c:if test="${activity != null}">Edit Activity</c:if>
-                                <c:if test="${activity == null}">Add New Activity</c:if>
-                            </h2>
+                            <h2>Add New Activity</h2>
                         </caption>
 
-                        <!-- -------- HIDE "USER ID" IF IT IS USER EDIT ACTION -------- -->
-
-                        <c:if test="${activity != null}">
-                            <input type="hidden" name="id" value="<c:out value='${activity.id}' />" />
-                        </c:if>
-
                         <!-- ------------------- USER ID ------------------- -->
+
                         <fieldset class="form-group">
                             <label>User ID</label>
                             <input type="number"
-                                   value="<c:out value='${activity.user_id}' />"
+                                   value="<%= request.getParameter("userId")%>"
                                    min="0"
                                    class="form-control"
                                    name="user_id"
@@ -70,8 +57,8 @@
                         <!-- --------------- ACTIVITY DESCRIPTION ---------------- -->
                         <fieldset class="form-group">
                             <label>Activity</label>
+                            <!-- alternative - replace <input> field by <textbox> -->
                             <input type="text"
-                                   value="<c:out value='${activity.activity}' />"
                                    class="form-control"
                                    name="activity" />
                         </fieldset>
@@ -82,7 +69,6 @@
                             <input type="number"
                                    min = 0
                                    step = 0.01
-                                   value="<c:out value='${activity.duration}' />"
                                    class="form-control"
                                    name="duration">
                         </fieldset>
