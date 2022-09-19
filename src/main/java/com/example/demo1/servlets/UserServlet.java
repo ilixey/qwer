@@ -1,6 +1,7 @@
 package com.example.demo1.servlets;
 
 import com.example.demo1.servlets.commands.Command;
+import com.example.demo1.servlets.commands.impl.ShowErrorPage;
 import com.example.demo1.servlets.commands.impl.activity.*;
 import com.example.demo1.servlets.commands.impl.user.*;
 
@@ -45,6 +46,11 @@ public class UserServlet extends HttpServlet {
         actionMap.put("/delete-activity", new DeleteActivity());
         // LIST : возвращает список деятельности для пользователя при условии что в ссылке есть URL переменная
         actionMap.put("/activity-list", new ShowActivities());
+
+        // --------------------- UTILITY COMMANDS ---------------------
+
+        // ERROR : перенаправляет на error-page.jsp
+        actionMap.put("/error", new ShowErrorPage());
     }
 
     @Override
@@ -55,8 +61,8 @@ public class UserServlet extends HttpServlet {
         // Reading requested action
         String action = request.getServletPath();
 
-        // Searching for a suitable action by actionMap. If action not found - /users-list
-        Command command = actionMap.getOrDefault(action, actionMap.get("/users-list"));
+        // Searching for a suitable action by actionMap. If action not found - /error
+        Command command = actionMap.getOrDefault(action, actionMap.get("/error"));
         command.execute(request, response);
     }
 
