@@ -14,7 +14,7 @@ public class dbActivityService {
 
     private final static dbActivityService INSTANCE = new dbActivityService();
 
-    private static final String INSERT_ACTIVITY = "INSERT INTO activities (user_id, activity, duration, publication_date) VALUES (?, ?, ?, ?);";
+    private static final String INSERT_ACTIVITY = "INSERT INTO activities (user_id, activity, duration, publication_date, deletable) VALUES (?, ?, ?, ?, true);";
     private static final String SELECT_ACTIVITY = "SELECT * FROM activities;";
     private static final String SELECT_ALL_ACTIVITIES_BY_ID = "SELECT * FROM activities WHERE user_id = ?;";
     private static final String DELETE_ACTIVITY = "DELETE FROM activities WHERE id=?;";

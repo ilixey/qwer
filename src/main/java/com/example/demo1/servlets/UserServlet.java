@@ -35,6 +35,7 @@ public class UserServlet extends HttpServlet {
         actionMap.put("/update-user", new UpdateUser());
         // LIST : To show all existing users. A.K.A. HomePage
         actionMap.put("/users-list", new ShowAllUsers());
+        actionMap.put("/", new ShowAllUsers());
 
         // ------------------- ACTIVITIES COMMANDS -------------------
 
