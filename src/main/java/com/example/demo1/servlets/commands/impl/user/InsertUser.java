@@ -20,7 +20,8 @@ public class InsertUser implements Command {
 
             User user = new User(name, surname, age);
             dbUserService.getInstance().addUser(user);
-            response.sendRedirect("/users-list");
+            String urlPrefix = request.getContextPath();
+            response.sendRedirect(urlPrefix + "/users-list");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
