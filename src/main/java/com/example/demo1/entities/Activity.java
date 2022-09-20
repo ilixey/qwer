@@ -10,18 +10,28 @@ public class Activity {
     private String activity;
     private BigDecimal duration;
     private Timestamp publication_date;
+    private boolean deletable;
+
+    public boolean isDeletable() {
+        return deletable;
+    }
+
+    public void setDeletable(boolean deletable) {
+        this.deletable = deletable;
+    }
 
     public Activity(String activity, BigDecimal duration) {
         this.activity = activity;
         this.duration = duration;
     }
 
-    public Activity(long id, long user_id, String activity, BigDecimal duration, Timestamp publication_date) {
+    public Activity(long id, long user_id, String activity, BigDecimal duration, Timestamp publication_date, Boolean deletable) {
         this.id = id;
         this.user_id = user_id;
         this.activity = activity;
         this.duration = duration;
         this.publication_date = publication_date;
+        this.deletable = deletable;
     }
 
     public Activity(long id, String activity, BigDecimal duration, Timestamp publication_date) {

@@ -63,8 +63,9 @@
                         <td>
 
                             <!-- --------------------- ACTION BUTTONS --------------------- -->
-
-                            <a href="<%= request.getContextPath()%>/delete-activity?id=<c:out value='${activity.id}' />">Delete</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <c:if test="${activity.deletable == true}">
+                            <a href="<%= request.getContextPath()%>/delete-activity?id=<c:out value='${activity.id}' />">Delete</a>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>

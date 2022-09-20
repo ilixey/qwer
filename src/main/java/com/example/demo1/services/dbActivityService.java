@@ -16,7 +16,7 @@ public class dbActivityService {
 
     private static final String INSERT_ACTIVITY = "INSERT INTO activities (user_id, activity, duration, publication_date, deletable) VALUES (?, ?, ?, ?, true);";
     private static final String SELECT_ACTIVITY = "SELECT * FROM activities;";
-    private static final String SELECT_ALL_ACTIVITIES_BY_ID = "SELECT * FROM activities WHERE user_id = ?;";
+    private static final String SELECT_ALL_ACTIVITIES_BY_ID = "SELECT * FROM activities WHERE user_id = ? ORDER BY id DESC LIMIT 50;";
     private static final String DELETE_ACTIVITY = "DELETE FROM activities WHERE id=?;";
     private static final String UPDATE_ACTIVITY = "UPDATE activities SET activity=?, duration=? WHERE id=?;";
 
@@ -78,7 +78,13 @@ public class dbActivityService {
             preparedStatement.setLong(1,user_id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Activity activity = new Activity(resultSet.getLong(1), resultSet.getLong(2), resultSet.getString(3), resultSet.getBigDecimal(4), resultSet.getTimestamp(5));
+                Activity activity = new Activity(
+                        resultSet.getLong(1),
+                        resultSet.getLong(2),
+                        resultSet.getString(3),
+                        resultSet.getBigDecimal(4),
+                        resultSet.getTimestamp(5),
+                        resultSet.getBoolean(6));
                 activityList.add(activity);
             }
             System.out.println(activityList);
