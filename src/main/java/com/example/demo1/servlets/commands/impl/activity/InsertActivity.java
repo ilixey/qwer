@@ -23,7 +23,8 @@ public class InsertActivity implements Command {
 
             Long userId = Long.valueOf(request.getParameter("userId"));
             String userName = request.getParameter("name");
-            response.sendRedirect("/activity-list?userId=" + userId + "&name=" + userName);
+            String urlPrefix = request.getContextPath();
+            response.sendRedirect(urlPrefix + "/activity-list?userId=" + userId + "&name=" + userName);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
