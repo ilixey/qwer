@@ -15,12 +15,15 @@ public class InsertActivity implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Long userId = Long.valueOf(request.getParameter("user_id"));
+            Long user_id = Long.valueOf(request.getParameter("user_id"));
             String doneActivity = request.getParameter("activity");
             BigDecimal duration = BigDecimal.valueOf(Double.parseDouble(request.getParameter("duration")));
-            Activity activity = new Activity(doneActivity,userId, duration);
+            Activity activity = new Activity(doneActivity,user_id, duration);
             dbActivityService.getInstance().addActivity(activity);
-            response.sendRedirect("users-list");
+
+            Long userId = Long.valueOf(request.getParameter("userId"));
+            String userName = request.getParameter("name");
+            response.sendRedirect("/users-list/activity-list?userId=" + userId + "&name=" + userName);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

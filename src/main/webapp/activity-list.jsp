@@ -37,7 +37,7 @@
                 <!-- ----------------------------- ACTION BUTTONS ----------------------------- -->
 
                 <a href="<%= request.getContextPath()%>/users-list" class="btn btn-info">Back to Users</a>
-                <a href="<%= request.getContextPath()%>/new-activity?userId=<%= request.getParameter("userId")%>" class="btn btn-info">Add New Activity</a>
+                <a href="<%= request.getContextPath()%>/new-activity?userId=<%= request.getParameter("userId")%>&name=<%= request.getParameter("name")%>" class="btn btn-info">Add New Activity</a>
             </div>
             <br>
 

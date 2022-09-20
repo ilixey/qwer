@@ -34,7 +34,7 @@
 
                 <!-- ------------------------- FORM GOAL ------------------------- -->
 
-                    <form action="<%= request.getContextPath()%>/insert-activity" method="post">
+                    <form action="<%= request.getContextPath()%>/insert-activity?userId=<%= request.getParameter("userId")%>&name=<%= request.getParameter("name")%>" method="post">
 
                         <!-- ---------------- FORM PAGE ACTION NAME ---------------- -->
 
