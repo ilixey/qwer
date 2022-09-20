@@ -21,7 +21,7 @@ public class UpdateUser implements Command {
 
             User user = new User(id, name, surname, age);
             dbUserService.getInstance().updateUser(user);
-            response.sendRedirect("list");
+            response.sendRedirect("/users-list");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

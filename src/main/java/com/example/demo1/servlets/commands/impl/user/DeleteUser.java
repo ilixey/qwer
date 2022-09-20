@@ -15,7 +15,8 @@ public class DeleteUser implements Command {
         try {
             long id = Long.parseLong(request.getParameter("id"));
             dbUserService.getInstance().deleteUser(id);
-            response.sendRedirect("users-list");
+            String urlPrefix = request.getContextPath();
+            response.sendRedirect(urlPrefix + "/users-list");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
