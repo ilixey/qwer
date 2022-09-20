@@ -68,7 +68,7 @@
                             <label>Duration</label>
                             <input type="number"
                                    min = 0
-                                   step = 0.01
+                                   step = 0.1
                                    class="form-control"
                                    name="duration">
                         </fieldset>
